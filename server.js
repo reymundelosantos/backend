@@ -3,10 +3,13 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 const routes = require('./src/routes')
 const { httpLogger, logger } = require('./lib/logger')
+const cors = require('cors')
 
 // Get Chuck Norris joke categories
+app.use(cors());
 app.use(httpLogger)
 app.use('/api', routes)
+
 
 app.use((err, req, res, next) => {
   const statusCode = err.status || 500;
